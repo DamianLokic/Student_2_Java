@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class CzteryKwadraty {       //Damian Łokić
+    public static void main(String[] args) {
+        Scanner odczyt;
+        System.out.println("Podaj 2 liczby:");
+        odczyt = new Scanner(System.in);
+        int b;
+        int a;
+        int i;
+        a = odczyt.nextInt();
+        b = odczyt.nextInt();
+        for(int j = a; j <= b; j++) {
+            for(i = 0; i <= Math.sqrt(b); i++) {            //4 fory na przeszukanie liczb po koleji
+                for(int x = i; x <= Math.sqrt(b); x++) {
+                    for( int y = x; y <= Math.sqrt(b); y++) {
+                        for(int z = y; z <= Math.sqrt(b); z++) {
+                            if(i*i+x*x+y*y+z*z == j){
+                                System.out.println(i+"^2 "+x+"^2 "+y+"^2 "+z+"^2 ");     // wypisuje wszystkie warianty
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+}
