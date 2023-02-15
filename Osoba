@@ -1,0 +1,51 @@
+class Data
+{
+    int dzien, miesiac, rok;
+    Data(int d,int m,int r)
+    {
+        this.dzien = d;
+        this.miesiac = m;
+        this.rok = r;
+    }
+
+    Data()
+    {
+    }
+
+}
+class Osoba extends Data{
+    String nazwisko;
+    String pesel;
+
+    Osoba(String pesel,String nazwisko)
+    {
+
+        this.pesel = (pesel);
+        this.nazwisko = nazwisko;
+
+    }
+
+
+    Data pesel2data()
+    {
+        System.out.println("Urodzony "+ String.valueOf(pesel.charAt(4)) + String.valueOf(pesel.charAt(5)) + " dnia " + (String.valueOf(pesel.charAt(2)) + String.valueOf(pesel.charAt(3)) + " miesiaca " + (String.valueOf(pesel.charAt(0)) + String.valueOf(pesel.charAt(1))) + " roku "));
+        return null;
+    }
+    char plec() {
+        if (pesel.charAt(9) %2 ==0)
+        {
+            System.out.println("To Mezczyzna");
+        } else
+        {
+            System.out.println("To Kobieta");
+        }
+        return 0;
+    }
+
+    public static void main(String[] args)
+    {
+        Osoba Damian = new Osoba("03071093281","Kowalski");
+        Damian.pesel2data();
+        Damian.plec();
+    }
+}
