@@ -1,0 +1,26 @@
+
+public class Suma
+{
+    int suma;
+
+    Suma()
+    {
+    }
+    int Licz(String str)
+    {
+        int IntValue = Integer.parseInt(str,10);
+
+        while(IntValue !=0)
+        {
+            suma += IntValue % 10;
+            IntValue /= 10 ;
+        }
+        return suma;
+    }
+    public static void main(String[] args)
+    {
+
+        Suma suma1 = new Suma();
+        System.out.print(suma1.Licz("234812343"));
+    }
+}
