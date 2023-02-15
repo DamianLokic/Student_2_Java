@@ -1,0 +1,180 @@
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
+class Pixel
+{
+    public int x;
+    public int y;
+
+    public Pixel(int x, int y)
+    {
+        this.x = x;
+        this.y = y;
+    }
+}
+class RGB
+{
+    public int r;
+    public int g;
+    public int b;
+
+    public RGB(int red, int green, int blue) {
+        this.r = red;
+        this.g = green;
+        this.b = blue;
+    }
+}
+
+class BitmapImage {
+    public int width;
+    public int height;
+    public RGB[][] bmp;
+
+    public BitmapImage(int width, int height)
+    {
+        this.width = width;
+        this.height = height;
+        bmp = new RGB[width][height];
+    }
+
+
+
+
+    public void setPixelColor(Pixel p, RGB color)
+    {
+        bmp[p.x][p.y] = color;
+    }
+
+    public void drawPolish() {
+
+
+        RGB white = new RGB(255, 255, 255);
+        for (int y = 0; y < this.height/2; y++)
+        {
+            for (int x = 0; x < this.width; x++)
+            {
+                setPixelColor(new Pixel(x, y), white);
+            }
+        }
+        RGB red = new RGB(210, 38, 48);
+                for (int y=this.height/2; y < this.height  ; y++)
+                {
+                    for (int x = 0; x < this.width; x++)
+                    {
+                        setPixelColor(new Pixel(x, y), red);
+                    }
+                }
+    }
+    public void drawGermany()
+    {
+        RGB black = new RGB(0 ,0 ,0);
+        for (int y = 0; y < this.height/3; y++)
+        {
+            for (int x = 0; x < this.width; x++)
+            {
+                setPixelColor(new Pixel(x, y), black);
+            }
+        }
+        RGB red = new RGB(255 ,0 ,0);
+        for (int y = this.height/3; y < 2*this.height/3  ; y++)
+        {
+            for (int x = 0; x < this.width; x++)
+            {
+                setPixelColor(new Pixel(x, y), red);
+            }
+        }
+        RGB yellow = new RGB(255,215,0);
+        for(int y =2*this.height/3; y<this.height;y++)
+        {
+            for (int x = 0; x < this.width; x++)
+            {
+                setPixelColor(new Pixel(x, y), yellow);
+            }
+        }
+
+    }
+    public void drawUkraine()
+    {
+        RGB blue = new RGB(0 ,87 ,184);
+        for (int y = 0; y < this.height/2; y++)
+        {
+            for (int x = 0; x < this.width; x++)
+            {
+                setPixelColor(new Pixel(x, y), blue);
+            }
+        }
+        RGB yellow = new RGB(254 ,221 ,0);
+        for (int y = this.height/2; y< this.height  ; y++)
+        {
+            for (int x = 0; x < this.width; x++)
+            {
+                setPixelColor(new Pixel(x, y), yellow);
+            }
+        }
+    }
+    public void drawCzech() {
+
+        RGB red = new RGB(215, 20, 26);
+        for (int y = this.height / 2; y < this.height; y++) {
+            for (int x = 0; x < this.width; x++) {
+                setPixelColor(new Pixel(x, y), red);
+            }
+        }
+        RGB white = new RGB(255, 255, 255);
+        for (int y = 0; y < this.height / 2; y++) {
+            for (int x = 0; x < this.width; x++) {
+                setPixelColor(new Pixel(x, y), white);
+            }
+        }
+        RGB blue = new RGB(17, 69, 126);
+        for (int y = 0; y < this.height/2; y++) {
+            for (int x = 0; x < 1.5 * y ; x++) {
+                setPixelColor(new Pixel(x, y), blue);
+            }
+        }
+        for (int y = this.height / 2; y < this.height; y++)
+        {
+            for (int x = 0; x < this.width - 1.5 * y; x++)
+            {
+                setPixelColor(new Pixel(x, y), blue);
+            }
+        }
+    }
+    public void saveToFile(String fname) {
+        PrintWriter out;
+        try {
+            out = new PrintWriter(fname + ".ppm");
+            out.println("P3");
+            out.println(width + " " + height);
+            out.println(255);
+            for (int y = 0; y < this.height; y++) {
+                for (int x = 0; x < this.width; x++) {
+                    out.println(bmp[x][y].r + " " + bmp[x][y].g + " " + bmp[x][y].b);
+                }
+            }
+            out.close();
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+    }
+}
+
+public class Rysunek {
+    public static void main(String[] args) {
+        System.out.println("Polska");
+        BitmapImage polska = new BitmapImage(800, 500);
+        BitmapImage ukraina = new BitmapImage(1200, 800);
+        BitmapImage germany = new BitmapImage(590, 350);
+        BitmapImage czechy = new BitmapImage(900, 600);
+        polska.drawPolish();
+        polska.saveToFile("polska");
+        ukraina.drawUkraine();
+        ukraina.saveToFile("ukraina");
+        germany.drawGermany();
+        germany.saveToFile("germany");
+        czechy.drawCzech();
+        czechy.saveToFile("czechy");
+    }
+}
