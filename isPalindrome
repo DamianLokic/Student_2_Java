@@ -1,0 +1,20 @@
+import java.util.Scanner;
+
+public class isPalindrom {
+    public static void main(String[] args) {
+        String liczba;                                   // zmienna na liczbe
+        StringBuilder reverse = new StringBuilder();     // stworzenie obiektu na reverse
+        Scanner odczyt = new Scanner(System.in);         // stworzenie
+        System.out.println("Podaj liczbe");
+        liczba = odczyt.nextLine();                     //wczytujemy liczbe
+        int length = liczba.length();                   //sprawdzamy dlugosc wczytanej liczbt
+        for (int i = length - 1; i >= 0; i--)           //w forze odwracamy liczbe
+            reverse.append(liczba.charAt(i));
+        if (liczba.equals(reverse.toString())) {        // sprawdzamy czy  odwrocone Stringi sa takie same
+            System.out.println("To palindrom");         //wypisujemy wynik
+        }
+        else
+            System.out.println("To nie palindrom");
+    }
+
+}
