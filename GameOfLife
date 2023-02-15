@@ -1,0 +1,98 @@
+
+public class Game_of_life {
+    int szerokosc;
+    int wysokosc;
+    int [][]tab;
+    public Game_of_life(int szerokosc,int wysokosc){
+        this.szerokosc = szerokosc;
+        this.wysokosc = wysokosc;
+        this.tab = new int[szerokosc][wysokosc];
+    }
+    public void Output(){
+            System.out.println("------------");
+        for (int y = 0; y < wysokosc; y++) {
+            String line = "|";
+            for (int x = 0; x < szerokosc; x++) {
+                if(this.tab[x][y]==0) {
+                    line += ".";
+                } else{
+                    line+="*";
+                }
+            }
+            line += "|";
+            System.out.println(line);
+        }
+        System.out.println("------------\n");
+    }
+    public void isAlive(int x, int y){
+        this.tab[x][y]= 1;
+    }
+    public void isDied(int x, int y){
+        this.tab[x][y]=0;
+    }
+    public int Alive(int x, int y){
+        int count =0;
+        count += GetState(x-1,y-1);
+        count += GetState(x,y-1);
+        count += GetState(x+1,y-1);
+
+        count += GetState(x-1,y);
+        count += GetState(x+1,y);
+
+        count += GetState(x-1,y+1);
+        count += GetState(x,y+1);
+        count += GetState(x+1,y+1);
+
+        return count;
+    }
+    public int GetState(int x, int y){
+        if(x<0 || x >= szerokosc){
+            return 0;
+        }
+        if(y<0 || y>= wysokosc){
+            return 0;
+        }
+        return this.tab[x][y];
+    }
+    public void step(){
+        int [][]NewTab = new int[szerokosc][wysokosc];
+        for (int y = 0; y < wysokosc; y++) {
+            for (int x = 0; x < szerokosc; x++) {
+                int IleZywiSasiedzi = Alive(x,y);
+
+                if(GetState(x,y)==1){
+                    if(IleZywiSasiedzi < 2){
+                        NewTab[x][y] = 0;
+                    } else if (IleZywiSasiedzi == 2 || IleZywiSasiedzi == 3) {
+                        NewTab[x][y]= 1;
+                    } else if (IleZywiSasiedzi >3) {
+                        NewTab[x][y] = 0;
+                    }
+
+                }else{
+                    if (IleZywiSasiedzi == 3){
+                        NewTab[x][y] = 1;
+                    }
+                }
+            }
+        }
+        this.tab = NewTab;
+    }
+    public static void main(String[] args) {
+        Game_of_life  game_of_life = new Game_of_life(10,5);
+        game_of_life.isAlive(2,2);
+        game_of_life.isAlive(3,3);
+        game_of_life.isAlive(4,3);
+        game_of_life.isAlive(4,4);
+        for (int i = 0; i < 1000; i++) {
+            game_of_life.Output();
+            game_of_life.step();
+            try{
+                Thread.sleep(500);
+            }catch(InterruptedException e){
+                System.out.println("error e");
+            }
+
+        }
+    }
+}
