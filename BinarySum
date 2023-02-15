@@ -1,0 +1,26 @@
+public class SumaDwojkowa
+{
+    int liczba1;
+    int liczba2;
+    int wynik;
+
+    public SumaDwojkowa()
+    {
+
+    }
+
+    void Licz(String s1,String s2)
+    {
+        liczba1 = Integer.parseInt(s1,2);
+        liczba2 = Integer.parseInt(s2,2);
+        wynik = liczba1 + liczba2;
+        System.out.println(Integer.toString(wynik,10));
+    }
+    public static void main(String[] args)
+    {
+        SumaDwojkowa Suma = new SumaDwojkowa();
+        SumaDwojkowa Suma2 = new SumaDwojkowa();
+        Suma.Licz("11","10");
+        Suma2.Licz("111","0011");
+    }
+}
