@@ -1,0 +1,177 @@
+import java.util.Scanner;
+
+interface Figura
+{
+    double getPerimeter();
+    double getArea();
+    String getType();
+}
+interface Figura3D extends Figura
+{
+    double getVolume();
+}
+class Prostokat implements Figura
+{
+    private double a;
+    private double b;
+
+    public Prostokat(double a, double b)
+    {
+        this.a = a;
+        this.b =b;
+    }
+    public double getPerimeter()
+    {
+        return 2 * a + 2 * b;
+    }
+    public double getArea()
+    {
+        return a * b;
+    }
+    public String getType()
+    {
+        return "\nProstokat";
+    }
+}
+
+class Kolo implements Figura
+{
+    private double radius;
+
+    public Kolo(double radius)
+    {
+        this.radius = radius;
+    }
+
+    public double getPerimeter()
+    {
+        return 2 * Math.PI * radius;
+    }
+
+    public double getArea()
+    {
+        return Math.PI * radius * radius;
+    }
+
+    public String getType()
+    {
+        return "\nkolo";
+    }
+}
+
+class Trojkat implements Figura
+{
+    private double a;
+    private double b;
+    private double przeciwprostokatna;
+
+    public Trojkat(double a, double b)
+    {
+        this.a = a;
+        this.b = b;
+        this.przeciwprostokatna = Math.sqrt(a * a + b * b);
+    }
+
+    public double getPerimeter()
+    {
+        return a + b + przeciwprostokatna;
+    }
+
+    public double getArea()
+    {
+        return a * b / 2;
+    }
+
+    public String getType()
+    {
+        return "\ntrojkat";
+    }
+}
+class Kula implements Figura3D
+{
+    private double radius;
+    public Kula(double radius)
+    {
+        this.radius = radius;
+    }
+    public double getPerimeter()
+    {
+        return 2 * Math.PI * radius;
+    }
+    public double getArea()
+    {
+        return 4 *Math.PI * radius *radius;
+    }
+
+    public double getVolume()
+    {
+        return 4 * Math.PI * radius * radius * radius / 3;
+    }
+    public String getType()
+    {
+        return "\nKula";
+    }
+}
+class Prostopadloscian implements Figura3D
+{
+    private double a;
+    private double b;
+    private double c;
+    public Prostopadloscian(double a, double b, double c)
+    {
+        this.a =a;
+        this.b = b;
+        this.c= c;
+    }
+    public double getPerimeter()
+    {
+        return 4*a+4*b+4*c;
+    }
+    public double getArea()
+    {
+        return 2*a*b+2*a*c+ 2*b*c;
+    }
+    public double getVolume()
+    {
+        return a * b *c;
+    }
+    public String getType()
+    {
+        return "\nProstopadloscian";
+    }
+}
+
+public class Main2 {
+    public static void main(String[] args) {
+        Figura[] figures = new Figura[3];
+        Figura3D[] figures3D = new Figura3D[2];
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Podaj promien Kola");
+        figures[0] = new Kolo(scanner.nextDouble());
+
+        System.out.println("Podaj 2 boki trojkata przeciwprostokatnego");
+        figures[1] = new Trojkat(scanner.nextDouble(), scanner.nextDouble());
+
+        System.out.println("Podaj 2 boki Prostokata");
+        figures[2] = new Prostokat(scanner.nextDouble(), scanner.nextDouble());
+
+        System.out.println("Podaj promien Kuli");
+        figures3D[0] = new Kula(scanner.nextDouble());
+
+        System.out.println("Podaj 2 boki i wysokosc Prostopadloscianu");
+        figures3D[1] = new Prostopadloscian(scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble());
+        for (Figura figure : figures)
+        {
+            System.out.println(figure.getType());
+            System.out.println("pole " + figure.getArea());
+            System.out.println("obwod " + figure.getPerimeter());
+        }
+        for (Figura3D figure3D : figures3D)
+        {
+            System.out.println(figure3D.getType());
+            System.out.println("pole " + figure3D.getArea());
+            System.out.println("obwod " + figure3D.getPerimeter());
+            System.out.println("Objetosc " + figure3D.getVolume());
+        }
+    }
+}
