@@ -1,0 +1,40 @@
+class Cezar {
+
+    String str;
+    Cezar()
+    {
+
+    }
+    public String cezar(String str, int offset) {
+
+        StringBuilder out = new StringBuilder();
+        for (int i = 0; i < str.length(); i++) {
+            char znak = str.charAt(i);
+
+            if ((znak >= 65 && znak <= 90) || (znak >= 97 && znak <= 122)) {
+                if (Character.isUpperCase(znak)) {
+                    if (znak + offset > 90) {
+                        out.append((char) ((znak + offset - 90 + 'A' - 1)));
+                    } else {
+                        out.append((char) (znak + offset));
+                    }
+                } else {
+                    if (znak + offset > 122) {
+                        out.append((char) ((znak + offset - 122 + 'a' - 1)));
+                    } else {
+                        out.append((char) (znak + offset));
+                    }
+                }
+            } else {
+                out.append(znak);
+            }
+        }
+
+        return out.toString();
+    }
+    public static void main(String[] args)
+    {
+        Cezar kod = new Cezar();
+        System.out.println(kod.cezar("adsnjads",6));
+    }
+}
