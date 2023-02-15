@@ -1,0 +1,17 @@
+public class LetterSizeCheck {
+    String str;
+    LetterSizeCheck(String str)
+    {
+        this.str = str;
+    }
+    boolean Check() {
+        String str2 = str;
+        String str3 = str2.toUpperCase();
+        return str2.equals(str3);
+    }
+    public static void main(String[] args)
+    {
+        LetterSizeCheck slowo = new LetterSizeCheck("JEsTem");
+        System.out.println(slowo.Check());
+    }
+}
